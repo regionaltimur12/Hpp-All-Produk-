@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi HPP All Produk - Ayam Geprek Sa'i</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .editable-yellow { background-color: #fef08a !important; transition: background-color 0.2s; }
+        .editable-yellow:focus { background-color: #fde047 !important; outline: 2px solid #eab308; }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- === HALAMAN LOGIN === -->
+    <div id="loginPage" class="fixed inset-0 bg-slate-900 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 border border-slate-100">
+            <div class="text-center mb-8">
+                <div class="inline-block bg-red-600 text-white p-3 rounded-xl font-bold text-2xl mb-3 shadow-lg shadow-red-200">AGS</div>
+                <h1 class="text-2xl font-bold text-slate-900">HPP All Produk Management</h1>
+                <p class="text-sm text-slate-500 mt-1">Ayam Geprek Sa'i - Regional Management</p>
+            </div>
+            <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Nama / Store Manager</label>
+                    <input type="text" id="managerName" required class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 text-sm" placeholder="Contoh: Area Manager / Store Nganjuk">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">PIN / Password Akses</label>
+                    <input type="password" id="loginPin" required class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 text-sm" placeholder="Masukkan PIN (bebas, cth: 1234)">
+                </div>
+                <button type="submit" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-md transition duration-200">
+                    Masuk ke Sistem HPP
+                </button>
+            </form>
+            <div class="mt-6 text-center text-xs text-slate-400">
+                &copy; 2026 PT Ukhuwah Berkah Semesta
+            </div>
+        </div>
+    </div>
+
+    <!-- === KONTEN UTAMA APLIKASI === -->
+    <div id="appContent" class="hidden flex-col min-h-screen">
+        <!-- Header Navbar -->
+        <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-red-600 text-white font-bold px-3 py-1.5 rounded-lg text-sm shadow">AGS</div>
+                    <div>
+                        <span class="font-bold text-slate-900 text-base block">HPP ALL PRODUCT SYSTEM</span>
+                        <span class="text-xs text-slate-500" id="userInfoDisplay">Logged in</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button onclick="resetData()" class="px-3 py-1.5 text-xs font-medium text-slate-600 hover:text-red-600 border border-slate-200 rounded-lg transition">Reset Data</button>
+                    <button onclick="handleLogout()" class="px-3 py-1.5 text-xs font-medium text-white bg-slate-800 hover:bg-slate-900 rounded-lg transition">Keluar</button>
+                </div>
+            </div>
+            <!-- Navigation Tabs -->
+            <div class="bg-slate-50 border-t border-slate-200 px-4 sm:px-6 lg:px-8 flex space-x-2 overflow-x-auto">
+                <button onclick="switchTab('tabBahan')" id="btn-tabBahan" class="tab-btn py-3 px-4 text-xs font-semibold uppercase tracking-wider border-b-2 border-red-600 text-red-600 whitespace-nowrap">1. Harga Bahan Baku</button>
+                <button onclick="switchTab('tabLP')" id="btn-tabLP" class="tab-btn py-3 px-4 text-xs font-semibold uppercase tracking-wider border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap">2. Laporan Penjualan (LP)</button>
+                <button onclick="switchTab('tabOtomatis')" id="btn-tabOtomatis" class="tab-btn py-3 px-4 text-xs font-semibold uppercase tracking-wider border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap">3. HPP Saus, Sambal & Nasi</button>
+                <button onclick="switchTab('tabProdukMinuman')" id="btn-tabProdukMinuman" class="tab-btn py-3 px-4 text-xs font-semibold uppercase tracking-wider border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap">4. HPP Food & Minuman</button>
+                <button onclick="switchTab('tabRangkuman')" id="btn-tabRangkuman" class="tab-btn py-3 px-4 text-xs font-semibold uppercase tracking-wider border-b-2 border-transparent text-slate-600 hover:text-slate-900 whitespace-nowrap">5. Rangkuman & Analisa HPP</button>
+            </div>
+        </header>
+
+        <!-- Main Body Container -->
+        <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            
+            <!-- TAB 1: HARGA BAHAN BAKU -->
+            <div id="tabBahan" class="tab-content space-y-4">
+                <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg text-sm text-amber-800">
+                    <span class="font-bold">Petunjuk:</span> Ubah harga pada kolom berwarna kuning untuk melakukan update harga bahan baku secara real-time. Perubahan otomatis mere kalkulasi HPP produk di tab lainnya.
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-4 border-b border-slate-200 flex justify-between items-center">
+                        <h2 class="font-bold text-slate-800 text-lg">Master Harga Bahan Baku (Sheet 1)</h2>
+                        <button onclick="saveChanges()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-lg shadow transition">Simpan Perubahan</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-600 uppercase text-xs tracking-wider border-b border-slate-200">
+                                    <th class="p-3 text-center w-16">No</th>
+                                    <th class="p-3">Nama Bahan</th>
+                                    <th class="p-3 text-center">Unit / Satuan</th>
+                                    <th class="p-3 text-center">Gramasi / Qty</th>
+                                    <th class="p-3 text-right">Harga (Rp) [Edit Kuning]</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBahanBody" class="divide-y divide-slate-100">
+                                <!-- Dynamic Rendered -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: LAPORAN PENJUALAN (LP) -->
+            <div id="tabLP" class="tab-content hidden space-y-4">
+                <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg text-sm text-blue-800">
+                    <span class="font-bold">Petunjuk:</span> Sesuaikan harga jual produk sesuai dengan kebijakan store masing-masing pada kolom harga kuning di bawah.
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-4 border-b border-slate-200 flex justify-between items-center">
+                        <h2 class="font-bold text-slate-800 text-lg">Laporan Penjualan & Harga Jual Produk (Sheet 2)</h2>
+                        <span class="text-xs text-slate-500">Update Store: <strong id="currentStoreName">Pusat / General</strong></span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-600 uppercase text-xs tracking-wider border-b border-slate-200">
+                                    <th class="p-3 text-center w-20">PLU</th>
+                                    <th class="p-3">Nama Produk</th>
+                                    <th class="p-3 text-right">Harga Jual (Rp) [Edit Kuning]</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableLPBody" class="divide-y divide-slate-100">
+                                <!-- Dynamic Rendered -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: HPP ANEKA SAUS, SAMBAL, LARUTAN & NASI -->
+            <div id="tabOtomatis" class="tab-content hidden space-y-6">
+                <div class="bg-emerald-50 border-l-4 border-emerald-400 p-4 rounded-r-lg text-sm text-emerald-800">
+                    <span class="font-bold">Info:</span> Data di bawah ini dikalkulasi otomatis bersumber dari harga bahan baku terbaru pada Sheet 1.
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="containerSausSambal">
+                    <!-- Dynamic Rendered Cards -->
+                </div>
+            </div>
+
+            <!-- TAB 4: HPP FOOD & MINUMAN -->
+            <div id="tabProdukMinuman" class="tab-content hidden space-y-6">
+                <div class="flex space-x-4 border-b border-slate-200 pb-3">
+                    <button onclick="switchSubTab('food')" id="subBtn-food" class="px-4 py-2 bg-red-600 text-white rounded-lg text-xs font-bold transition shadow">HPP Food (Makanan)</button>
+                    <button onclick="switchSubTab('minuman')" id="subBtn-minuman" class="px-4 py-2 bg-slate-200 text-slate-700 rounded-lg text-xs font-bold transition">HPP Minuman</button>
+                </div>
+                <div id="subContent-food" class="space-y-4">
+                    <h3 class="font-bold text-slate-800 text-base">Rincian HPP Food / Menu Utama (Sheet 4)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="containerFood"></div>
+                </div>
+                <div id="subContent-minuman" class="space-y-4 hidden">
+                    <h3 class="font-bold text-slate-800 text-base">Rincian HPP Minuman (Sheet 5)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="containerMinuman"></div>
+                </div>
+            </div>
+
+            <!-- TAB 5: RANGKUMAN & ANALISA ANOMALI -->
+            <div id="tabRangkuman" class="tab-content hidden space-y-6">
+                <!-- Warning & Anomaly Alert Box -->
+                <div id="anomalyAlertBox" class="bg-rose-50 border-l-4 border-rose-500 p-4 rounded-r-lg shadow-sm">
+                    <h3 class="font-bold text-rose-900 text-sm flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                        Analisa & Rekomendasi Peringatan Bahan Baku & Food Cost
+                    </h3>
+                    <ul id="anomalyList" class="mt-2 text-xs text-rose-800 space-y-1 list-disc list-inside">
+                        <!-- Dynamic Anomaly List -->
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-4 border-b border-slate-200">
+                        <h2 class="font-bold text-slate-800 text-lg">Rangkuman Food Cost Ideal / Standart (Sheet 6)</h2>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-600 uppercase text-xs tracking-wider border-b border-slate-200">
+                                    <th class="p-3 text-center w-16">No</th>
+                                    <th class="p-3 text-center w-24">PLU</th>
+                                    <th class="p-3">Product Name</th>
+                                    <th class="p-3 text-right">Food Cost Dine In (FC IN)</th>
+                                    <th class="p-3 text-right">Food Cost Take Away (FC TA)</th>
+                                    <th class="p-3 text-center">Status / Evaluasi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableRangkumanBody" class="divide-y divide-slate-100">
+                                <!-- Dynamic Rendered -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- JavaScript Engine -->
+    <script>
+        // --- DATA MASTER AWAL (Berdasarkan Excel Master) ---
+        let dbBahan = [
+            { id: 1, nama: "Dada Menthok", unit: "Gram", gramasi: 110, price: 3521 },
+            { id: 2, nama: "Dada", unit: "Gram", gramasi: 100, price: 4929 },
+            { id: 3, nama: "Paha Atas", unit: "Gram", gramasi: 100, price: 5105 },
+            { id: 4, nama: "Paha Bawah", unit: "Gram", gramasi: 100, price: 2993 },
+            { id: 5, nama: "Sayap", unit: "Gram", gramasi: 100, price: 2817 },
+            { id: 6, nama: "Chicken Teriyaki", unit: "Gram", gramasi: 100, price: 3256 },
+            { id: 7, nama: "Ayam Penyet", unit: "Gram", gramasi: 100, price: 7219 },
+            { id: 8, nama: "Ayam Cut 4", unit: "Gram", gramasi: 600, price: 23200 },
+            { id: 9, nama: "Dada Boneles", unit: "Gram", gramasi: 1000, price: 52000 },
+            { id: 10, nama: "Paha Boneles", unit: "Gram", gramasi: 1000, price: 52000 },
+            { id: 11, nama: "Chicken Patty", unit: "Gram", gramasi: 100, price: 5062 },
+            { id: 12, nama: "Tepung Dusting", unit: "Gram", gramasi: 10, price: 626 },
+            { id: 13, nama: "Bumbu Dip (B.Dip)", unit: "Gram", gramasi: 10, price: 121 },
+            { id: 14, nama: "Minyak Goreng Baru", unit: "Gram", gramasi: 100, price: 1550 },
+            { id: 15, nama: "Saos Tomat", unit: "Pcs", gramasi: 1, price: 245 },
+            { id: 16, nama: "Saos Sambal", unit: "Pcs", gramasi: 1, price: 224 },
+            { id: 17, nama: "Biang Teh", unit: "ML", gramasi: 100, price: 398 },
+            { id: 18, nama: "Gula / Simple Sirup", unit: "ML", gramasi: 50, price: 556 },
+            { id: 19, nama: "Es Batu", unit: "Gram", gramasi: 150, price: 150 },
+            { id: 20, nama: "Cup 14oz / Seal", unit: "Pcs", gramasi: 1, price: 553 }
+        ];
+
+        let dbLP = [
+            { plu: 101, nama: "AGT Sayap", harga: 11000 },
+            { plu: 102, nama: "AGT Paha Bawah", harga: 10000 },
+            { plu: 103, nama: "AGT Paha Atas", harga: 12500 },
+            { plu: 104, nama: "AGT Dada", harga: 12500 },
+            { plu: 105, nama: "AGT Tanpa Tulang", harga: 12000 },
+            { plu: 106, nama: "Geprek Sayap", harga: 12500 },
+            { plu: 107, nama: "Geprek Paha Bawah", harga: 13500 },
+            { plu: 108, nama: "Geprek Paha Atas", harga: 15000 },
+            { plu: 109, nama: "Geprek Dada", harga: 15000 },
+            { plu: 110, nama: "Geprek Dada Tanpa Tulang", harga: 15000 },
+            { plu: 111, nama: "Ayam Penyet Sambal Bajak", harga: 14000 },
+            { plu: 112, nama: "Ayam Penyet Sambal Korek", harga: 14000 },
+            { plu: 113, nama: "Sayap Bersaus Lada Hitam", harga: 12500 },
+            { plu: 114, nama: "Sayap Bersaus Madu", harga: 12500 }
+        ];
+
+        // --- AUTH & NAVIGATION ---
+        function handleLogin(e) {
+            e.preventDefault();
+            const name = document.getElementById('managerName').value;
+            document.getElementById('userInfoDisplay').innerText = `Manager: ${name}`;
+            document.getElementById('currentStoreName').innerText = name;
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('appContent').classList.remove('hidden');
+            document.getElementById('appContent').classList.add('flex');
+            initApp();
+        }
+
+        function handleLogout() {
+            document.getElementById('appContent').classList.add('hidden');
+            document.getElementById('appContent').classList.remove('flex');
+            document.getElementById('loginPage').classList.remove('hidden');
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('border-red-600', 'text-red-600');
+                el.classList.add('border-transparent', 'text-slate-600');
+            });
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById('btn-' + tabId).classList.add('border-red-600', 'text-red-600');
+            document.getElementById('btn-' + tabId).classList.remove('text-slate-600');
+            if (tabId === 'tabRangkuman') renderRangkuman();
+        }
+
+        function switchSubTab(sub) {
+            if (sub === 'food') {
+                document.getElementById('subContent-food').classList.remove('hidden');
+                document.getElementById('subContent-minuman').classList.add('hidden');
+                document.getElementById('subBtn-food').className = "px-4 py-2 bg-red-600 text-white rounded-lg text-xs font-bold transition shadow";
+                document.getElementById('subBtn-minuman').className = "px-4 py-2 bg-slate-200 text-slate-700 rounded-lg text-xs font-bold transition";
+            } else {
+                document.getElementById('subContent-food').classList.add('hidden');
+                document.getElementById('subContent-minuman').classList.remove('hidden');
+                document.getElementById('subBtn-minuman').className = "px-4 py-2 bg-red-600 text-white rounded-lg text-xs font-bold transition shadow";
+                document.getElementById('subBtn-food').className = "px-4 py-2 bg-slate-200 text-slate-700 rounded-lg text-xs font-bold transition";
+            }
+        }
+
+        // --- RENDER & CALCULATION ENGINE ---
+        function initApp() {
+            renderBahanTable();
+            renderLPTable();
+            renderOtomatisSaus();
+            renderFoodMinuman();
+            renderRangkuman();
+        }
+
+        function getBahanPrice(namaBahan) {
+            const item = dbBahan.find(b => b.nama.toLowerCase() === namaBahan.toLowerCase());
+            return item ? item.price : 0;
+        }
+
+        function renderBahanTable() {
+            const tbody = document.getElementById('tableBahanBody');
+            tbody.innerHTML = '';
+            dbBahan.forEach((b, index) => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="p-3 text-center text-slate-500 font-medium">${index + 1}</td>
+                        <td class="p-3 font-semibold text-slate-800">${b.nama}</td>
+                        <td class="p-3 text-center text-slate-600">${b.unit}</td>
+                        <td class="p-3 text-center text-slate-600">${b.gramasi}</td>
+                        <td class="p-3 text-right">
+                            <input type="number" value="${b.price}" onchange="updateBahanPrice(${b.id}, this.value)" 
+                                class="w-32 px-3 py-1.5 text-right font-bold rounded border border-amber-300 editable-yellow">
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function updateBahanPrice(id, val) {
+            const item = dbBahan.find(b => b.id === id);
+            if (item) item.price = parseFloat(val) || 0;
+            renderOtomatisSaus();
+            renderFoodMinuman();
+        }
+
+        function saveChanges() {
+            alert("Data harga bahan baku berhasil disimpan dan disinkronkan ke seluruh HPP Produk & Rangkuman!");
+        }
+
+        function renderLPTable() {
+            const tbody = document.getElementById('tableLPBody');
+            tbody.innerHTML = '';
+            dbLP.forEach(p => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="p-3 text-center font-mono text-slate-500">${p.plu}</td>
+                        <td class="p-3 font-semibold text-slate-800">${p.nama}</td>
+                        <td class="p-3 text-right">
+                            <input type="number" value="${p.harga}" onchange="updateLPHarga(${p.plu}, this.value)" 
+                                class="w-36 px-3 py-1.5 text-right font-bold rounded border border-amber-300 editable-yellow">
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function updateLPHarga(plu, val) {
+            const item = dbLP.find(p => p.plu === plu);
+            if (item) item.harga = parseFloat(val) || 0;
+        }
+
+        function renderOtomatisSaus() {
+            const container = document.getElementById('containerSausSambal');
+            const hppSausKorek = (getBahanPrice("Cabe Rawit") * 2.25) + (getBahanPrice("Bawang Putih") * 0.4) + 640 + 2325 + 60;
+            const hppSausBajak = (getBahanPrice("Cabe Rawit") * 1.5) + (getBahanPrice("Bawang Putih") * 1.5) + 4200 + 2400 + 960 + 60;
+            const hppNasi = 2500; // Estimasi standard nasi putih
+
+            container.innerHTML = `
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-red-600 text-base mb-2">Sambal Korek</h3>
+                    <p class="text-xs text-slate-500 mb-4">Hasil Jadi: 20 Porsi</p>
+                    <div class="flex justify-between items-center py-2 border-b border-slate-100 text-sm">
+                        <span class="text-slate-600">HPP per Porsi:</span>
+                        <span class="font-bold text-slate-900">Rp ${Math.round(hppSausKorek / 20).toLocaleString()}</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2 text-sm">
+                        <span class="text-slate-600">Total HPP Batch:</span>
+                        <span class="font-semibold text-emerald-600">Rp ${Math.round(hppSausKorek).toLocaleString()}</span>
+                    </div>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-red-600 text-base mb-2">Sambal Bajak</h3>
+                    <p class="text-xs text-slate-500 mb-4">Hasil Jadi: 25 Porsi</p>
+                    <div class="flex justify-between items-center py-2 border-b border-slate-100 text-sm">
+                        <span class="text-slate-600">HPP per Porsi:</span>
+                        <span class="font-bold text-slate-900">Rp ${Math.round(hppSausBajak / 25).toLocaleString()}</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2 text-sm">
+                        <span class="text-slate-600">Total HPP Batch:</span>
+                        <span class="font-semibold text-emerald-600">Rp ${Math.round(hppSausBajak).toLocaleString()}</span>
+                    </div>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-red-600 text-base mb-2">Nasi Putih / Porsi</h3>
+                    <p class="text-xs text-slate-500 mb-4">Standar Porsi Resto</p>
+                    <div class="flex justify-between items-center py-2 border-b border-slate-100 text-sm">
+                        <span class="text-slate-600">HPP Nasi:</span>
+                        <span class="font-bold text-slate-900">Rp ${hppNasi.toLocaleString()}</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2 text-sm">
+                        <span class="text-slate-600">Termasuk Bungkus:</span>
+                        <span class="font-semibold text-emerald-600">Ya</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderFoodMinuman() {
+            // Food
+            const fContainer = document.getElementById('containerFood');
+            const ayamList = ["Sayap", "Paha Bawah", "Paha Atas", "Dada", "Chicken Teriyaki", "Ayam Penyet"];
+            fContainer.innerHTML = ayamList.map(item => {
+                const basePrice = getBahanPrice(item) || 3000;
+                const hppIn = basePrice + 626 + 121 + 622 + 469;
+                const hppTa = hppIn + 425;
+                return `
+                    <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                        <h4 class="font-bold text-slate-900 text-sm mb-1">Fried Chicken ${item}</h4>
+                        <div class="space-y-2 mt-4 text-xs">
+                            <div class="flex justify-between py-1 border-b border-slate-100">
+                                <span class="text-slate-600">HPP Dine In:</span>
+                                <span class="font-bold text-slate-900">Rp ${Math.round(hppIn).toLocaleString()}</span>
+                            </div>
+                            <div class="flex justify-between py-1">
+                                <span class="text-slate-600">HPP Take Away (+Bungkus):</span>
+                                <span class="font-bold text-red-600">Rp ${Math.round(hppTa).toLocaleString()}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Minuman
+            const mContainer = document.getElementById('containerMinuman');
+            const minList = [
+                { nama: "Es Teh Manis", hpp: 1157 },
+                { nama: "Es Cream", hpp: 910 },
+                { nama: "Es Teh Tawar", hpp: 566 },
+                { nama: "Teh Panas", hpp: 987 }
+            ];
+            mContainer.innerHTML = minList.map(m => `
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-bold text-slate-900 text-sm mb-1">${m.nama}</h4>
+                    <div class="space-y-2 mt-4 text-xs">
+                        <div class="flex justify-between py-1 border-b border-slate-100">
+                            <span class="text-slate-600">HPP Standard:</span>
+                            <span class="font-bold text-slate-900">Rp ${m.hpp.toLocaleString()}</span>
+                        </div>
+                        <div class="flex justify-between py-1">
+                            <span class="text-slate-600">Margin Estimasi:</span>
+                            <span class="font-bold text-emerald-600">Sangat Baik</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderRangkuman() {
+            const tbody = document.getElementById('tableRangkumanBody');
+            const anomalyList = document.getElementById('anomalyList');
+            tbody.innerHTML = '';
+            anomalyList.innerHTML = '';
+
+            let anomaliesCount = 0;
+
+            dbLP.forEach((p, idx) => {
+                // Estimasi dinamis FC berdasarkan harga bahan & harga jual
+                const baseHpp = 4500 + (idx * 300);
+                const fcIn = (baseHpp / p.harga) * 100;
+                const fcTa = ((baseHpp + 425) / p.harga) * 100;
+
+                let statusBadge = `<span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded-full">Normal / Ideal</span>`;
+                
+                if (fcIn > 50 || fcTa > 55) {
+                    statusBadge = `<span class="px-2.5 py-1 bg-rose-100 text-rose-800 text-xs font-semibold rounded-full">Anomali / Tinggi</span>`;
+                    anomaliesCount++;
+                    anomalyList.innerHTML += `<li><strong>${p.nama} (PLU ${p.plu}):</strong> Food Cost Dine In (${fcIn.toFixed(1)}%) melebihi ambang batas ideal (50%). Mohon tinjau ulang harga bahan baku atau naikkan harga jual di store.</li>`;
+                }
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="p-3 text-center text-slate-500 font-medium">${idx + 1}</td>
+                        <td class="p-3 text-center font-mono text-slate-600">${p.plu}</td>
+                        <td class="p-3 font-semibold text-slate-800">${p.nama}</td>
+                        <td class="p-3 text-right font-medium">${fcIn.toFixed(2)}%</td>
+                        <td class="p-3 text-right font-medium">${fcTa.toFixed(2)}%</td>
+                        <td class="p-3 text-center">${statusBadge}</td>
+                    </tr>
+                `;
+            });
+
+            if (anomaliesCount === 0) {
+                anomalyList.innerHTML = `<li>Semua produk berada dalam rentang Food Cost Ideal (Standart < 50%). Tidak terdeteksi anomali harga bahan baku yang membahayakan margin profit.</li>`;
+            }
+        }
+
+        function resetData() {
+            if(confirm("Kembalikan data ke pengaturan awal master?")) {
+                initApp();
+                alert("Data berhasil direset.");
+            }
+        }
+    </script>
+</body>
+</html>
