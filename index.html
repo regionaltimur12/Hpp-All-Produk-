@@ -577,6 +577,9 @@
             
             const hppSausKorek = (rawitPerGram * 225) + (putihPerGram * 40) + 640 + 2325 + 60;
             const hppSausBajak = (rawitPerGram * 60) + (putihPerGram * 40) + 4200 + 2400 + 960 + 60;
+            const hppMatah = 12000 + 12000;
+            const hppSausRempah = 2132 + 1543;
+            const hppBiangTeh = 3100 + 3500 + 368;
             const hppNasi = getBahanPrice("Beras") * 125 + 313 + 495;
 
             container.innerHTML = `
@@ -598,6 +601,36 @@
                     <div class="space-y-3 pt-2 border-t border-slate-800/80 text-xs">
                         <div class="flex justify-between py-1.5"><span class="text-slate-400">HPP per Porsi:</span><span class="font-bold text-white text-sm">Rp ${Math.round(hppSausBajak / 25).toLocaleString()}</span></div>
                         <div class="flex justify-between py-1.5"><span class="text-slate-400">Total HPP Batch:</span><span class="font-semibold text-emerald-400">Rp ${Math.round(hppSausBajak).toLocaleString()}</span></div>
+                    </div>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-white text-base">Sambal Matah</h3>
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-red-950 text-red-400 px-2.5 py-1 rounded-lg border border-red-800/50">Batch Mix</span>
+                    </div>
+                    <div class="space-y-3 pt-2 border-t border-slate-800/80 text-xs">
+                        <div class="flex justify-between py-1.5"><span class="text-slate-400">Total Komponen:</span><span class="font-bold text-white text-sm">Rp ${Math.round(hppMatah).toLocaleString()}</span></div>
+                        <div class="flex justify-between py-1.5"><span class="text-slate-400">Status:</span><span class="font-semibold text-emerald-400">Aktif</span></div>
+                    </div>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-white text-base">Saos Rempah Pedas</h3>
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-red-950 text-red-400 px-2.5 py-1 rounded-lg border border-red-800/50">Pelengkap</span>
+                    </div>
+                    <div class="space-y-3 pt-2 border-t border-slate-800/80 text-xs">
+                        <div class="flex justify-between py-1.5"><span class="text-slate-400">Total Komponen:</span><span class="font-bold text-white text-sm">Rp ${Math.round(hppSausRempah).toLocaleString()}</span></div>
+                        <div class="flex justify-between py-1.5"><span class="text-slate-400">Status:</span><span class="font-semibold text-emerald-400">Aktif</span></div>
+                    </div>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-white text-base">Biang Teh & Larutan</h3>
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-red-950 text-red-400 px-2.5 py-1 rounded-lg border border-red-800/50">Minuman Base</span>
+                    </div>
+                    <div class="space-y-3 pt-2 border-t border-slate-800/80 text-xs">
+                        <div class="flex justify-between py-1.5"><span class="text-slate-400">Total Komponen:</span><span class="font-bold text-white text-sm">Rp ${Math.round(hppBiangTeh).toLocaleString()}</span></div>
+                        <div class="flex justify-between py-1.5"><span class="text-slate-400">Status:</span><span class="font-semibold text-emerald-400">Aktif</span></div>
                     </div>
                 </div>
                 <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-xl">
