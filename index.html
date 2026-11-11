@@ -94,7 +94,7 @@
             <div class="bg-slate-950/80 border-t border-slate-800/80 px-4 sm:px-6 lg:px-8 flex space-x-1 sm:space-x-3 overflow-x-auto">
                 <button onclick="switchTab('tabBahan')" id="btn-tabBahan" class="tab-btn py-3 px-4 text-xs font-bold uppercase tracking-wider border-b-2 border-red-500 text-red-400 whitespace-nowrap transition">1. Master Harga Bahan</button>
                 <button onclick="switchTab('tabLP')" id="btn-tabLP" class="tab-btn py-3 px-4 text-xs font-bold uppercase tracking-wider border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap transition">2. Laporan Penjualan (LP)</button>
-                <button onclick="switchTab('tabOtomatis')" id="btn-tabOtomatis" class="tab-btn py-3 px-4 text-xs font-bold uppercase tracking-wider border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap transition">3. HPP Saus, Sambal & Nasi</button>
+                <button onclick="switchTab('tabOtomatis')" id="btn-tabOtomatis" class="tab-btn py-3 px-4 text-xs font-bold uppercase tracking-wider border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap transition">3. HPP Bumbu Saus dan pelengkap lainnya</button>
                 <button onclick="switchTab('tabProdukMinuman')" id="btn-tabProdukMinuman" class="tab-btn py-3 px-4 text-xs font-bold uppercase tracking-wider border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap transition">4. HPP Food & Minuman</button>
                 <button onclick="switchTab('tabRangkuman')" id="btn-tabRangkuman" class="tab-btn py-3 px-4 text-xs font-bold uppercase tracking-wider border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap transition">5 & 6. Rangkuman & Anomali</button>
             </div>
@@ -142,20 +142,20 @@
                 </div>
             </div>
 
-            <!-- TAB 2: LAPORAN PENJUALAN & HARGA JUAL (SHEET 2) -->
+            <!-- TAB 2: LAPORAN PENJUALAN (LP) - LENGKAP -->
             <div id="tabLP" class="tab-content hidden space-y-6">
                 <div class="bg-blue-950/30 border border-blue-500/30 p-4 rounded-2xl flex items-start space-x-3 text-blue-200">
                     <svg class="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     <div class="text-xs leading-relaxed">
-                        <strong class="font-bold">Panduan Sheet 2:</strong> Daftar lengkap produk makanan, minuman, dan paket beserta harga jual store. Sesuaikan pada kolom <span class="bg-yellow-200 text-slate-900 px-1.5 py-0.5 rounded font-bold">Kuning</span>.
+                        <strong class="font-bold">Panduan Sheet 2:</strong> Daftar lengkap seluruh produk (Ayam Geprek, Saus Pilihan, Varian Keju, Snack, Nasi, Sayuran, Paket Suhe/Sholeh/LSM, hingga Aneka Minuman) beserta harga jual store masing-masing. Sesuaikan pada kolom <span class="bg-yellow-200 text-slate-900 px-1.5 py-0.5 rounded font-bold">Kuning</span>.
                     </div>
                 </div>
 
                 <div class="bg-slate-900 border border-slate-800 rounded-3xl shadow-xl overflow-hidden">
                     <div class="p-5 border-b border-slate-800 flex justify-between items-center">
                         <div>
-                            <h2 class="font-bold text-white text-lg tracking-tight">Daftar Produk & Harga Jual (Sheet 2)</h2>
-                            <p class="text-xs text-slate-400 mt-0.5">Semua PLU makanan, snack, nasi, dan minuman</p>
+                            <h2 class="font-bold text-white text-lg tracking-tight">Daftar Produk & Harga Jual Lengkap (Sheet 2)</h2>
+                            <p class="text-xs text-slate-400 mt-0.5">Semua PLU Makanan, Sayuran, Paket Suhe/Sholeh, dan Minuman</p>
                         </div>
                         <span class="text-xs font-bold bg-slate-800 text-slate-300 px-3 py-1.5 rounded-xl border border-slate-700">Store: <span id="currentStoreName" class="text-red-400">Pusat</span></span>
                     </div>
@@ -176,12 +176,12 @@
                 </div>
             </div>
 
-            <!-- TAB 3: HPP ANEKA SAUS, SAMBAL & NASI (SHEET 3) -->
+            <!-- TAB 3: HPP BUMBU SAUS DAN PELENGKAP LAINNYA (SHEET 3) -->
             <div id="tabOtomatis" class="tab-content hidden space-y-6">
                 <div class="bg-emerald-950/30 border border-emerald-500/30 p-4 rounded-2xl flex items-start space-x-3 text-emerald-200">
                     <svg class="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     <div class="text-xs leading-relaxed">
-                        <strong class="font-bold">Sheet 3 Kalkulasi Otomatis:</strong> Rincian komponen hpp aneka sambal (Korek, Bajak, Matah), saus pelengkap, larutan biang teh, dan nasi putih yang langsung terhubung dinamis dengan harga bahan baku terbaru pada Tab 1.
+                        <strong class="font-bold">Sheet 3 Kalkulasi Otomatis HPP Bumbu Saus dan pelengkap lainnya:</strong> Rincian komponen hpp aneka sambal (Korek, Bajak, Matah), saus pelengkap, larutan biang teh, dan nasi putih yang langsung terhubung dinamis dengan harga bahan baku terbaru pada Tab 1.
                     </div>
                 </div>
 
@@ -190,25 +190,25 @@
                 </div>
             </div>
 
-            <!-- TAB 4: HPP FOOD & MINUMAN (SHEET 4) -->
+            <!-- TAB 4: HPP FOOD & MINUMAN LENGKAP (SHEET 4) -->
             <div id="tabProdukMinuman" class="tab-content hidden space-y-6">
                 <div class="flex space-x-2 border-b border-slate-800 pb-4">
                     <button onclick="switchSubTab('food')" id="subBtn-food" class="px-5 py-2.5 bg-red-600 text-white rounded-xl text-xs font-bold transition shadow-md shadow-red-600/20">Sheet 4.1: HPP Menu Utama (Food)</button>
                     <button onclick="switchSubTab('minuman')" id="subBtn-minuman" class="px-5 py-2.5 bg-slate-800 text-slate-400 hover:text-white rounded-xl text-xs font-bold transition">Sheet 4.2: HPP Minuman</button>
                 </div>
                 <div id="subContent-food" class="space-y-4">
-                    <h3 class="font-bold text-white text-base">Rincian Komponen HPP Menu Utama (Dine In vs Take Away)</h3>
+                    <h3 class="font-bold text-white text-base">Rincian Komponen HPP Seluruh Menu Utama & Paket (Dine In vs Take Away)</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="containerFood"></div>
                 </div>
                 <div id="subContent-minuman" class="space-y-4 hidden">
-                    <h3 class="font-bold text-white text-base">Rincian Komponen HPP Aneka Minuman</h3>
+                    <h3 class="font-bold text-white text-base">Rincian Komponen HPP Seluruh Aneka Minuman</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="containerMinuman"></div>
                 </div>
             </div>
 
-            <!-- TAB 5 & 6: RANGKUMAN & ANALISA ANOMALI DENGAN AMBANG BATAS BARU -->
+            <!-- TAB 5 & 6: RANGKUMAN & ANALISA ANOMALI LENGKAP -->
             <div id="tabRangkuman" class="tab-content hidden space-y-6">
-                <!-- Warning & Anomaly Alert Box dengan Ambang Batas Ketat -->
+                <!-- Warning & Anomaly Alert Box -->
                 <div id="anomalyAlertBox" class="bg-rose-950/40 border border-rose-500/40 p-5 rounded-2xl shadow-xl backdrop-blur-sm">
                     <h3 class="font-bold text-rose-300 text-sm flex items-center mb-3">
                         <svg class="w-5 h-5 mr-2 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
@@ -225,8 +225,8 @@
 
                 <div class="bg-slate-900 border border-slate-800 rounded-3xl shadow-xl overflow-hidden">
                     <div class="p-5 border-b border-slate-800">
-                        <h2 class="font-bold text-white text-lg tracking-tight">Sheet 5 & 6: Rangkuman Food Cost Ideal / Standart & Evaluasi</h2>
-                        <p class="text-xs text-slate-400 mt-0.5">Persentase Food Cost Dine In (FC IN) dan Take Away (FC TA) seluruh produk</p>
+                        <h2 class="font-bold text-white text-lg tracking-tight">Sheet 5 & 6: Rangkuman Food Cost Ideal / Standart & Evaluasi Lengkap</h2>
+                        <p class="text-xs text-slate-400 mt-0.5">Persentase Food Cost Dine In (FC IN) dan Take Away (FC TA) seluruh produk master secara menyeluruh</p>
                     </div>
                     <div class="overflow-x-auto max-h-[600px]">
                         <table class="w-full text-left border-collapse text-sm">
@@ -253,7 +253,6 @@
 
     <!-- JavaScript Engine & Google Sheets Database Integration -->
     <script>
-        // Endpoint Google Apps Script yang terhubung ke database Google Sheets Anda
         const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzClswrk8HAfBGwJbaRYaJCislAgPEL9qTQyc8c8saCHYOTCv4z-yS2NvUEJezz1yzn9A/exec";
 
         // Database 51 Bahan Baku Lengkap Sesuai Sheet Master Excel
@@ -311,62 +310,117 @@
             { id: 51, nama: "Minyak Goodfry", unit: "Gram", gramasi: 15000, price: 351000 }
         ];
 
-        // Database Produk Laporan Penjualan (LP) Lengkap
+        // Database Laporan Penjualan (LP) Lengkap
         let dbLP = [
-            { plu: 101, nama: "AGT Sayap", harga: 11000 },
-            { plu: 102, nama: "AGT Paha Bawah", harga: 10000 },
-            { plu: 103, nama: "AGT Paha Atas", harga: 12500 },
-            { plu: 104, nama: "AGT Dada", harga: 12500 },
-            { plu: 105, nama: "AGT Tanpa Tulang", harga: 12000 },
-            { plu: 106, nama: "Geprek Sayap", harga: 12500 },
-            { plu: 107, nama: "Geprek Paha Bawah", harga: 13500 },
-            { plu: 108, nama: "Geprek Paha Atas", harga: 15000 },
-            { plu: 109, nama: "Geprek Dada", harga: 15000 },
-            { plu: 110, nama: "Geprek Dada Tanpa Tulang", harga: 15000 },
-            { plu: 111, nama: "Ayam Penyet Sambal Bajak", harga: 14000 },
-            { plu: 112, nama: "Ayam Penyet Sambal Korek", harga: 14000 },
-            { plu: 113, nama: "Sayap Bersaus Lada Hitam", harga: 12500 },
-            { plu: 114, nama: "Sayap Bersaus Madu", harga: 10000 },
-            { plu: 115, nama: "Sayap Bersaus Rempah", harga: 12500 },
-            { plu: 116, nama: "Paha Bawah Bersaus Lada Hitam", harga: 14000 },
-            { plu: 117, nama: "Paha Bawah Bersaus Madu", harga: 14000 },
-            { plu: 118, nama: "Paha Bawah Bersaus Rempah", harga: 14000 },
-            { plu: 119, nama: "Paha Atas Bersaus Lada Hitam", harga: 16000 },
-            { plu: 120, nama: "Paha Atas Bersaus Madu", harga: 16000 },
-            { plu: 121, nama: "Paha Atas Bersaus Rempah", harga: 16000 },
-            { plu: 122, nama: "Dada Bersaus Lada Hitam", harga: 16000 },
-            { plu: 123, nama: "Dada Bersaus Madu", harga: 16000 },
-            { plu: 124, nama: "Dada Bersaus Rempah", harga: 16000 },
-            { plu: 125, nama: "Dada Tanpa Tulang Bersaus Lada Hitam", harga: 15000 },
-            { plu: 126, nama: "Dada Tanpa Tulang Bersaus Madu", harga: 15000 },
-            { plu: 127, nama: "Dada Tanpa Tulang Bersaus Rempah", harga: 15000 },
-            { plu: 128, nama: "Sayap Berkeju", harga: 12000 },
-            { plu: 129, nama: "Paha Bawah Berkeju", harga: 13000 },
-            { plu: 135, nama: "Chicken Strip", harga: 11000 },
-            { plu: 136, nama: "Chicken Steak", harga: 15000 },
-            { plu: 137, nama: "Chicken Teriyaki", harga: 13000 },
-            { plu: 201, nama: "Tahu", harga: 5000 },
-            { plu: 202, nama: "Tempe", harga: 5000 },
-            { plu: 203, nama: "Lele Crispy", harga: 12000 },
-            { plu: 204, nama: "Jamur Crispy", harga: 8000 },
-            { plu: 205, nama: "Terong Crispy", harga: 6000 },
-            { plu: 206, nama: "Tahu Crispy", harga: 8500 },
-            { plu: 301, nama: "Nasi Putih", harga: 4000 },
-            { plu: 302, nama: "Nasi Goreng", harga: 14000 },
-            { plu: 303, nama: "Nasi Goreng Telor", harga: 16000 },
-            { plu: 307, nama: "French Fries", harga: 8000 },
-            { plu: 308, nama: "Chicken Burger", harga: 14000 },
-            { plu: 309, nama: "Cheese Burger", harga: 16000 },
-            { plu: 310, nama: "Perkedel", harga: 4000 },
-            { plu: 311, nama: "Telor Mata Sapi", harga: 3000 },
-            { plu: 312, nama: "Onion Ring", harga: 8000 },
-            { plu: 313, nama: "Mie Goreng", harga: 14000 },
-            { plu: 314, nama: "Kwetiaw Goreng", harga: 14000 },
-            { plu: 503, nama: "Es Teh", harga: 4000 },
-            { plu: 505, nama: "Es Jeruk", harga: 5000 },
-            { plu: 520, nama: "Kopi Hitam", harga: 5000 },
-            { plu: 522, nama: "Es Cappucino", harga: 7000 },
-            { plu: 527, nama: "Milkshake Coklat", harga: 8000 }
+            { plu: 101, nama: "AGT Sayap", harga: 11000, hppIn: 4656, hppTa: 5081 },
+            { plu: 102, nama: "AGT Paha Bawah", harga: 10000, hppIn: 4832, hppTa: 5257 },
+            { plu: 103, nama: "AGT Paha Atas", harga: 12500, hppIn: 4832, hppTa: 5257 },
+            { plu: 104, nama: "AGT Dada", harga: 12500, hppIn: 6768, hppTa: 7193 },
+            { plu: 105, nama: "AGT Tanpa Tulang", harga: 12000, hppIn: 4696, hppTa: 5121 },
+            { plu: 106, nama: "Geprek Sayap", harga: 12500, hppIn: 5031, hppTa: 5616 },
+            { plu: 107, nama: "Geprek Paha Bawah", harga: 13500, hppIn: 5207, hppTa: 5792 },
+            { plu: 108, nama: "Geprek Paha Atas", harga: 15000, hppIn: 7319, hppTa: 7904 },
+            { plu: 109, nama: "Geprek Dada", harga: 15000, hppIn: 6871, hppTa: 7456 },
+            { plu: 110, nama: "Geprek Dada Tanpa Tulang", harga: 15000, hppIn: 4935, hppTa: 5520 },
+            { plu: 111, nama: "Ayam Penyet Sambal Bajak", harga: 14000, hppIn: 8843, hppTa: 9428 },
+            { plu: 112, nama: "Ayam Penyet Sambal Korek", harga: 14000, hppIn: 8843, hppTa: 9428 },
+            { plu: 113, nama: "Sayap Bersaus Lada Hitam", harga: 12500, hppIn: 5431, hppTa: 6016 },
+            { plu: 114, nama: "Sayap Bersaus Madu", harga: 10000, hppIn: 5214, hppTa: 5799 },
+            { plu: 115, nama: "Sayap Bersaus Rempah", harga: 12500, hppIn: 5350, hppTa: 5935 },
+            { plu: 116, nama: "Paha Bawah Bersaus Lada Hitam", harga: 14000, hppIn: 5607, hppTa: 6192 },
+            { plu: 117, nama: "Paha Bawah Bersaus Madu", harga: 14000, hppIn: 5390, hppTa: 5975 },
+            { plu: 118, nama: "Paha Bawah Bersaus Rempah", harga: 14000, hppIn: 5526, hppTa: 6111 },
+            { plu: 119, nama: "Paha Atas Bersaus Lada Hitam", harga: 16000, hppIn: 5720, hppTa: 6305 },
+            { plu: 120, nama: "Paha Atas Bersaus Madu", harga: 16000, hppIn: 5503, hppTa: 6088 },
+            { plu: 121, nama: "Paha Atas Bersaus Rempah", harga: 16000, hppIn: 5639, hppTa: 6224 },
+            { plu: 122, nama: "Dada Bersaus Lada Hitam", harga: 16000, hppIn: 7656, hppTa: 8241 },
+            { plu: 123, nama: "Dada Bersaus Madu", harga: 16000, hppIn: 7439, hppTa: 8024 },
+            { plu: 124, nama: "Dada Bersaus Rempah", harga: 16000, hppIn: 7575, hppTa: 8160 },
+            { plu: 125, nama: "Dada Tanpa Tulang Bersaus Lada Hitam", harga: 15000, hppIn: 5720, hppTa: 6305 },
+            { plu: 126, nama: "Dada Tanpa Tulang Bersaus Madu", harga: 15000, hppIn: 5503, hppTa: 6088 },
+            { plu: 127, nama: "Dada Tanpa Tulang Bersaus Rempah", harga: 15000, hppIn: 5639, hppTa: 6224 },
+            { plu: 128, nama: "Sayap Berkeju", harga: 12000, hppIn: 5120, hppTa: 5705 },
+            { plu: 129, nama: "Paha Bawah Berkeju", harga: 13000, hppIn: 5296, hppTa: 5881 },
+            { plu: 130, nama: "Paha Atas Berkeju", harga: 15000, hppIn: 7408, hppTa: 7993 },
+            { plu: 131, nama: "Dada Berkeju", harga: 15000, hppIn: 6960, hppTa: 7545 },
+            { plu: 132, nama: "Dada Tanpa Tulang Berkeju", harga: 16000, hppIn: 5024, hppTa: 5609 },
+            { plu: 135, nama: "Chicken Strip", harga: 11000, hppIn: 4696, hppTa: 5121 },
+            { plu: 136, nama: "Chicken Steak", harga: 15000, hppIn: 4779, hppTa: 5639 },
+            { plu: 137, nama: "Chicken Teriyaki", harga: 13000, hppIn: 4900, hppTa: 5325 },
+            { plu: 138, nama: "Tantula Geprek Promo", harga: 13000, hppIn: 3815, hppTa: 4400 },
+            { plu: 201, nama: "Tahu", harga: 5000, hppIn: 1200, hppTa: 1500 },
+            { plu: 202, nama: "Tempe", harga: 5000, hppIn: 1200, hppTa: 1500 },
+            { plu: 203, nama: "Lele Crispy", harga: 12000, hppIn: 4500, hppTa: 4900 },
+            { plu: 204, nama: "Jamur Crispy", harga: 8000, hppIn: 3200, hppTa: 3600 },
+            { plu: 205, nama: "Terong Crispy", harga: 6000, hppIn: 2400, hppTa: 2800 },
+            { plu: 206, nama: "Tahu Crispy", harga: 8500, hppIn: 3100, hppTa: 3500 },
+            { plu: 301, nama: "Nasi Putih", harga: 4000, hppIn: 1500, hppTa: 1900 },
+            { plu: 302, nama: "Nasi Goreng", harga: 14000, hppIn: 5500, hppTa: 6000 },
+            { plu: 303, nama: "Nasi Goreng Telor", harga: 16000, hppIn: 6800, hppTa: 7300 },
+            { plu: 304, nama: "Nasi Goreng Tancap", harga: 13000, hppIn: 5100, hppTa: 5600 },
+            { plu: 305, nama: "Nasi Goreng Sayap", harga: 19000, hppIn: 7800, hppTa: 8300 },
+            { plu: 306, nama: "Nasi Chicken Teriyaki", harga: 15500, hppIn: 6720, hppTa: 7305 },
+            { plu: 307, nama: "French Fries", harga: 8000, hppIn: 3500, hppTa: 3900 },
+            { plu: 308, nama: "Chicken Burger", harga: 14000, hppIn: 5800, hppTa: 6300 },
+            { plu: 309, nama: "Cheese Burger", harga: 16000, hppIn: 6900, hppTa: 7400 },
+            { plu: 310, nama: "Perkedel", harga: 4000, hppIn: 1600, hppTa: 1900 },
+            { plu: 311, nama: "Telor Mata Sapi", harga: 3000, hppIn: 1200, hppTa: 1500 },
+            { plu: 312, nama: "Onion Ring", harga: 8000, hppIn: 3200, hppTa: 3600 },
+            { plu: 313, nama: "Mie Goreng", harga: 14000, hppIn: 5400, hppTa: 5900 },
+            { plu: 314, nama: "Kwetiaw Goreng", harga: 14000, hppIn: 5400, hppTa: 5900 },
+            { plu: 315, nama: "Aneka Sambal", harga: 4000, hppIn: 1200, hppTa: 1500 },
+            { plu: 801, nama: "Ca Kangkung", harga: 6000, hppIn: 2500, hppTa: 2900 },
+            { plu: 802, nama: "Ca Tauge", harga: 6000, hppIn: 2500, hppTa: 2900 },
+            { plu: 803, nama: "Ca Kacang Panjang", harga: 6000, hppIn: 2500, hppTa: 2900 },
+            { plu: 901, nama: "Paket Suhe 1", harga: 12000, hppIn: 5200, hppTa: 5800 },
+            { plu: 902, nama: "Paket Suhe 2", harga: 15000, hppIn: 6500, hppTa: 7100 },
+            { plu: 903, nama: "Paket Suhe 3", harga: 19000, hppIn: 8200, hppTa: 8800 },
+            { plu: 904, nama: "Paket Suhe 4", harga: 18000, hppIn: 7800, hppTa: 8400 },
+            { plu: 905, nama: "Paket Suhe 5", harga: 18500, hppIn: 8000, hppTa: 8600 },
+            { plu: 906, nama: "Paket Suhe 6", harga: 21000, hppIn: 9100, hppTa: 9700 },
+            { plu: 907, nama: "Paket Suhe 7", harga: 20000, hppIn: 8600, hppTa: 9200 },
+            { plu: 908, nama: "Paket ACT 1", harga: 19500, hppIn: 8400, hppTa: 9000 },
+            { plu: 909, nama: "Paket ACT 2", harga: 19500, hppIn: 8400, hppTa: 9000 },
+            { plu: 910, nama: "Paket Matah 1", harga: 18000, hppIn: 7800, hppTa: 8400 },
+            { plu: 911, nama: "Paket Matah 2", harga: 18500, hppIn: 8000, hppTa: 8600 },
+            { plu: 912, nama: "Paket Matah 3", harga: 21000, hppIn: 9100, hppTa: 9700 },
+            { plu: 913, nama: "Paket Sholeh 1", harga: 12000, hppIn: 5200, hppTa: 5800 },
+            { plu: 914, nama: "Paket Sholeh 2", harga: 18000, hppIn: 7800, hppTa: 8400 },
+            { plu: 915, nama: "Paket Sholeh 3", harga: 21000, hppIn: 9100, hppTa: 9700 },
+            { plu: 916, nama: "Paket Sholeh 4", harga: 18500, hppIn: 8000, hppTa: 8600 },
+            { plu: 950, nama: "Komplit 1", harga: 17500, hppIn: 7600, hppTa: 8200 },
+            { plu: 951, nama: "Komplit 2", harga: 16500, hppIn: 7100, hppTa: 7700 },
+            { plu: 952, nama: "Komplit 3", harga: 13000, hppIn: 5600, hppTa: 6200 },
+            { plu: 401, nama: "Ice Cream", harga: 3000, hppIn: 910, hppTa: 1035 },
+            { plu: 501, nama: "Teh Tawar", harga: 4000, hppIn: 566, hppTa: 1159 },
+            { plu: 502, nama: "Teh Panas", harga: 4000, hppIn: 987, hppTa: 1580 },
+            { plu: 503, nama: "Es Teh", harga: 4000, hppIn: 1157, hppTa: 1710 },
+            { plu: 504, nama: "Jeruk Panas", harga: 5000, hppIn: 2000, hppTa: 2500 },
+            { plu: 505, nama: "Es Jeruk", harga: 5000, hppIn: 2229, hppTa: 2782 },
+            { plu: 506, nama: "Air Mineral Cup", harga: 1000, hppIn: 1082, hppTa: 1207 },
+            { plu: 507, nama: "Air Mineral Botol", harga: 4000, hppIn: 1477, hppTa: 1602 },
+            { plu: 508, nama: "The Botol", harga: 5000, hppIn: 2040, hppTa: 2593 },
+            { plu: 509, nama: "The Kotak", harga: 5000, hppIn: 2248, hppTa: 2801 },
+            { plu: 510, nama: "Fruitea Botol", harga: 5000, hppIn: 2040, hppTa: 2593 },
+            { plu: 511, nama: "Fruitea Genggam", harga: 5000, hppIn: 2115, hppTa: 2668 },
+            { plu: 512, nama: "Tebs", harga: 5000, hppIn: 2040, hppTa: 2593 },
+            { plu: 513, nama: "Es Choclat Delight", harga: 7000, hppIn: 4577, hppTa: 5130 },
+            { plu: 514, nama: "Choclat Delight Float", harga: 9000, hppIn: 5487, hppTa: 6040 },
+            { plu: 516, nama: "Milo Upgrade", harga: 4000, hppIn: 1800, hppTa: 2300 },
+            { plu: 517, nama: "Lemontea Panas", harga: 5000, hppIn: 2100, hppTa: 2600 },
+            { plu: 518, nama: "Es Lemontea", harga: 5000, hppIn: 2300, hppTa: 2800 },
+            { plu: 519, nama: "Es Susu Sirup", harga: 12000, hppIn: 7418, hppTa: 7971 },
+            { plu: 520, nama: "Kopi Hitam", harga: 5000, hppIn: 687, hppTa: 1240 },
+            { plu: 521, nama: "Cappucino Panas", harga: 7000, hppIn: 2800, hppTa: 3300 },
+            { plu: 522, nama: "Es Cappucino", harga: 7000, hppIn: 3100, hppTa: 3600 },
+            { plu: 523, nama: "Cappucino Float", harga: 10000, hppIn: 4000, hppTa: 4500 },
+            { plu: 527, nama: "Milkshake Coklat", harga: 8000, hppIn: 3500, hppTa: 4000 },
+            { plu: 528, nama: "Milkshake Coklat Float", harga: 10500, hppIn: 4500, hppTa: 5000 },
+            { plu: 529, nama: "Milkshake Strawberry", harga: 8000, hppIn: 3500, hppTa: 4000 },
+            { plu: 530, nama: "Milkshake Strawberry Float", harga: 10500, hppIn: 4500, hppTa: 5000 },
+            { plu: 531, nama: "Milkshake Vanila", harga: 8000, hppIn: 3500, hppTa: 4000 },
+            { plu: 532, nama: "Milkshake Vanila Float", harga: 10500, hppIn: 4500, hppTa: 5000 },
+            { plu: 533, nama: "Upgrade TBS", harga: 2000, hppIn: 800, hppTa: 1000 }
         ];
 
         function handleLogin(e) {
@@ -561,37 +615,58 @@
 
         function renderFoodMinuman() {
             const fContainer = document.getElementById('containerFood');
-            const ayamList = ["Sayap", "Paha Bawah", "Paha Atas", "Dada", "Chicken Teriyaki", "Ayam Penyet"];
-            fContainer.innerHTML = ayamList.map(item => {
-                const basePrice = (dbBahan.find(b => b.nama.toLowerCase().includes(item.toLowerCase())) || {price: 3000}).price;
-                const hppIn = basePrice + 626 + 121 + 622 + 469;
-                const hppTa = hppIn + 425;
-                return `
-                    <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-xl">
-                        <h4 class="font-bold text-white text-sm mb-4">Fried Chicken ${item}</h4>
-                        <div class="space-y-3 pt-2 border-t border-slate-800/80 text-xs">
-                            <div class="flex justify-between py-1.5"><span class="text-slate-400">HPP Dine In:</span><span class="font-bold text-white text-sm">Rp ${Math.round(hppIn).toLocaleString()}</span></div>
-                            <div class="flex justify-between py-1.5"><span class="text-slate-400">HPP Take Away (+Bungkus):</span><span class="font-bold text-red-400 text-sm">Rp ${Math.round(hppTa).toLocaleString()}</span></div>
-                        </div>
+            const foodList = [
+                { nama: "Fried Chicken Paha Bawah", hppIn: 4832, hppTa: 5257 },
+                { nama: "Fried Chicken Paha Atas", hppIn: 4832, hppTa: 5257 },
+                { nama: "Fried Chicken Dada", hppIn: 6768, hppTa: 7193 },
+                { nama: "Chicken Strip", hppIn: 4696, hppTa: 5121 },
+                { nama: "Fried Chicken Sayap", hppIn: 4656, hppTa: 5081 },
+                { nama: "Fried Chicken Boneless", hppIn: 5999, hppTa: 6424 },
+                { nama: "Geprek Sayap", hppIn: 5031, hppTa: 5616 },
+                { nama: "Geprek Paha Bawah", hppIn: 5207, hppTa: 5792 },
+                { nama: "Geprek Paha Atas", hppIn: 7319, hppTa: 7904 },
+                { nama: "Chicken Steak", hppIn: 4779, hppTa: 5639 },
+                { nama: "Geprek Tantula Promo 50g", hppIn: 3815, hppTa: 4400 },
+                { nama: "Geprek Tantula 85g", hppIn: 4935, hppTa: 5520 },
+                { nama: "Geprek Dada", hppIn: 6871, hppTa: 7456 },
+                { nama: "Ayam Penyet Sambal Bajak", hppIn: 8843, hppTa: 9428 },
+                { nama: "Nasi Chicken Teriyaki", hppIn: 6720, hppTa: 7305 },
+                { nama: "Paket Palestine 1", hppIn: 11200, hppTa: 12000 }
+            ];
+
+            fContainer.innerHTML = foodList.map(f => `
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-xl">
+                    <h4 class="font-bold text-white text-sm mb-4">${f.nama}</h4>
+                    <div class="space-y-3 pt-2 border-t border-slate-800/80 text-xs">
+                        <div class="flex justify-between py-1.5"><span class="text-slate-400">HPP Dine In:</span><span class="font-bold text-white text-sm">Rp ${f.hppIn.toLocaleString()}</span></div>
+                        <div class="flex justify-between py-1.5"><span class="text-slate-400">HPP Take Away (+Bungkus):</span><span class="font-bold text-red-400 text-sm">Rp ${f.hppTa.toLocaleString()}</span></div>
                     </div>
-                `;
-            }).join('');
+                </div>
+            `).join('');
 
             const mContainer = document.getElementById('containerMinuman');
             const minList = [
-                { nama: "Es Teh Manis", hpp: 1157 },
-                { nama: "Es Cream", hpp: 910 },
-                { nama: "Es Teh Tawar", hpp: 566 },
-                { nama: "Teh Panas", hpp: 987 },
-                { nama: "Es Jeruk", hpp: 2229 },
-                { nama: "Kopi Hitam", hpp: 687 }
+                { nama: "Es Teh Manis", hppIn: 1157, hppTa: 1710 },
+                { nama: "Es Cream", hppIn: 910, hppTa: 1035 },
+                { nama: "Es Teh Tawar", hppIn: 566, hppTa: 1159 },
+                { nama: "Teh Panas", hppIn: 987, hppTa: 1580 },
+                { nama: "Es Jeruk", hppIn: 2229, hppTa: 2782 },
+                { nama: "Kopi Hitam", hppIn: 687, hppTa: 1240 },
+                { nama: "Susu Sirup", hppIn: 7418, hppTa: 7971 },
+                { nama: "FTB Genggam", hppIn: 2115, hppTa: 2668 },
+                { nama: "Air Mineral Cup", hppIn: 1082, hppTa: 1207 },
+                { nama: "Air Mineral Botol", hppIn: 1477, hppTa: 1602 },
+                { nama: "Sosro Botol", hppIn: 2040, hppTa: 2593 },
+                { nama: "Teh Kotak / Genggam", hppIn: 2248, hppTa: 2801 },
+                { nama: "Es Choclat Delight", hppIn: 4577, hppTa: 5130 }
             ];
+
             mContainer.innerHTML = minList.map(m => `
                 <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-xl">
                     <h4 class="font-bold text-white text-sm mb-4">${m.nama}</h4>
                     <div class="space-y-3 pt-2 border-t border-slate-800/80 text-xs">
-                        <div class="flex justify-between py-1.5"><span class="text-slate-400">HPP Standard:</span><span class="font-bold text-white text-sm">Rp ${m.hpp.toLocaleString()}</span></div>
-                        <div class="flex justify-between py-1.5"><span class="text-slate-400">Status Margin:</span><span class="font-semibold text-emerald-400">Optimal</span></div>
+                        <div class="flex justify-between py-1.5"><span class="text-slate-400">HPP Dine In:</span><span class="font-bold text-white text-sm">Rp ${m.hppIn.toLocaleString()}</span></div>
+                        <div class="flex justify-between py-1.5"><span class="text-slate-400">HPP Take Away:</span><span class="font-bold text-red-400 text-sm">Rp ${m.hppTa.toLocaleString()}</span></div>
                     </div>
                 </div>
             `).join('');
@@ -606,13 +681,13 @@
             let highUrgencyCount = 0;
 
             dbLP.forEach((p, idx) => {
-                const baseHpp = 4500 + (idx * 250);
-                const fcIn = (baseHpp / p.harga) * 100;
-                const fcTa = ((baseHpp + 425) / p.harga) * 100;
+                if (p.harga === 0) return;
+
+                const fcIn = (p.hppIn / p.harga) * 100;
+                const fcTa = (p.hppTa / p.harga) * 100;
 
                 let statusBadge = `<span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px] font-bold rounded-full">Ideal (< 57%)</span>`;
                 
-                // Evaluasi Berdasarkan Ambang Batas Ketat Sesuai Instruksi
                 if (fcIn >= 61 || fcTa >= 61) {
                     statusBadge = `<span class="px-3 py-1 bg-rose-600/20 text-rose-300 border border-rose-500/40 text-[11px] font-bold rounded-full animate-pulse">Kritis (&ge; 61%)</span>`;
                     highUrgencyCount++;
