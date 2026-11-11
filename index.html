@@ -90,7 +90,7 @@
                 </div>
             </div>
             
-            <!-- Navigation Tabs Bar (Sheet 1 s.d 6 Lengkap) -->
+            <!-- Navigation Tabs Bar -->
             <div class="bg-slate-950/80 border-t border-slate-800/80 px-4 sm:px-6 lg:px-8 flex space-x-1 sm:space-x-3 overflow-x-auto">
                 <button onclick="switchTab('tabBahan')" id="btn-tabBahan" class="tab-btn py-3 px-4 text-xs font-bold uppercase tracking-wider border-b-2 border-red-500 text-red-400 whitespace-nowrap transition">1. Master Harga Bahan</button>
                 <button onclick="switchTab('tabLP')" id="btn-tabLP" class="tab-btn py-3 px-4 text-xs font-bold uppercase tracking-wider border-b-2 border-transparent text-slate-400 hover:text-slate-200 whitespace-nowrap transition">2. Laporan Penjualan (LP)</button>
@@ -108,7 +108,7 @@
                 <div class="bg-amber-950/30 border border-amber-500/30 p-4 rounded-2xl flex items-start space-x-3 text-amber-200">
                     <svg class="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     <div class="text-xs leading-relaxed">
-                        <strong class="font-bold">Panduan Sheet 1:</strong> Seluruh 51 item bahan baku terdaftar lengkap. Kolom <span class="bg-yellow-200 text-slate-900 px-1.5 py-0.5 rounded font-bold">Gramasi</span> dan <span class="bg-yellow-200 text-slate-900 px-1.5 py-0.5 rounded font-bold">Harga Satuan (Rp)</span> berwarna kuning dapat disesuaikan. Klik simpan untuk merekam data ke database Google Sheets Anda secara real-time.
+                        <strong class="font-bold">Panduan Sheet 1:</strong> Seluruh 51 item bahan baku terdaftar lengkap sesuai master Excel. Kolom <span class="bg-yellow-200 text-slate-900 px-1.5 py-0.5 rounded font-bold">Gramasi</span> dan <span class="bg-yellow-200 text-slate-900 px-1.5 py-0.5 rounded font-bold">Harga Satuan (Rp)</span> berwarna kuning dapat disesuaikan. Klik simpan untuk merekam data ke database Google Sheets Anda secara real-time.
                     </div>
                 </div>
 
@@ -181,7 +181,7 @@
                 <div class="bg-emerald-950/30 border border-emerald-500/30 p-4 rounded-2xl flex items-start space-x-3 text-emerald-200">
                     <svg class="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     <div class="text-xs leading-relaxed">
-                        <strong class="font-bold">Sheet 3 Kalkulasi Otomatis:</strong> Rincian komponen hpp aneka sambal (Korek, Bajak), saus pelengkap, larutan bumbu, dan nasi putih yang langsung terhubung dinamis dengan harga bahan baku terbaru pada Tab 1.
+                        <strong class="font-bold">Sheet 3 Kalkulasi Otomatis:</strong> Rincian komponen hpp aneka sambal (Korek, Bajak, Matah), saus pelengkap, larutan biang teh, dan nasi putih yang langsung terhubung dinamis dengan harga bahan baku terbaru pada Tab 1.
                     </div>
                 </div>
 
@@ -253,9 +253,10 @@
 
     <!-- JavaScript Engine & Google Sheets Database Integration -->
     <script>
-        // Masukkan URL Web App Google Apps Script Anda di sini untuk sinkronisasi database Google Sheets
+        // Endpoint Google Apps Script yang terhubung ke database Google Sheets Anda
         const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzClswrk8HAfBGwJbaRYaJCislAgPEL9qTQyc8c8saCHYOTCv4z-yS2NvUEJezz1yzn9A/exec";
 
+        // Database 51 Bahan Baku Lengkap Sesuai Sheet Master Excel
         let dbBahan = [
             { id: 1, nama: "Dada Menthok", unit: "Gram", gramasi: 110, price: 3521 },
             { id: 2, nama: "Dada", unit: "Gram", gramasi: 100, price: 4929 },
@@ -277,7 +278,7 @@
             { id: 18, nama: "Keju Blok", unit: "Gram", gramasi: 170, price: 16900 },
             { id: 19, nama: "Mayonice", unit: "Gram", gramasi: 1000, price: 29500 },
             { id: 20, nama: "Margarine", unit: "Gram", gramasi: 250, price: 6000 },
-            { id: 21, nama: "Roti Tawar", unit: "Gram", gramasi: 16, price: 18000 },
+            { id: 21, nama: "Roti tawar", unit: "Gram", gramasi: 16, price: 18000 },
             { id: 22, nama: "Susu Ultra", unit: "Gram", gramasi: 125, price: 3500 },
             { id: 23, nama: "Es Cream", unit: "Gram", gramasi: 8000, price: 145000 },
             { id: 24, nama: "Es Batu", unit: "Gram", gramasi: 5000, price: 5000 },
@@ -310,6 +311,7 @@
             { id: 51, nama: "Minyak Goodfry", unit: "Gram", gramasi: 15000, price: 351000 }
         ];
 
+        // Database Produk Laporan Penjualan (LP) Lengkap
         let dbLP = [
             { plu: 101, nama: "AGT Sayap", harga: 11000 },
             { plu: 102, nama: "AGT Paha Bawah", harga: 10000 },
@@ -327,6 +329,17 @@
             { plu: 114, nama: "Sayap Bersaus Madu", harga: 10000 },
             { plu: 115, nama: "Sayap Bersaus Rempah", harga: 12500 },
             { plu: 116, nama: "Paha Bawah Bersaus Lada Hitam", harga: 14000 },
+            { plu: 117, nama: "Paha Bawah Bersaus Madu", harga: 14000 },
+            { plu: 118, nama: "Paha Bawah Bersaus Rempah", harga: 14000 },
+            { plu: 119, nama: "Paha Atas Bersaus Lada Hitam", harga: 16000 },
+            { plu: 120, nama: "Paha Atas Bersaus Madu", harga: 16000 },
+            { plu: 121, nama: "Paha Atas Bersaus Rempah", harga: 16000 },
+            { plu: 122, nama: "Dada Bersaus Lada Hitam", harga: 16000 },
+            { plu: 123, nama: "Dada Bersaus Madu", harga: 16000 },
+            { plu: 124, nama: "Dada Bersaus Rempah", harga: 16000 },
+            { plu: 125, nama: "Dada Tanpa Tulang Bersaus Lada Hitam", harga: 15000 },
+            { plu: 126, nama: "Dada Tanpa Tulang Bersaus Madu", harga: 15000 },
+            { plu: 127, nama: "Dada Tanpa Tulang Bersaus Rempah", harga: 15000 },
             { plu: 128, nama: "Sayap Berkeju", harga: 12000 },
             { plu: 129, nama: "Paha Bawah Berkeju", harga: 13000 },
             { plu: 135, nama: "Chicken Strip", harga: 11000 },
@@ -448,7 +461,6 @@
             renderFoodMinuman();
         }
 
-        // --- FUNGSI GOOGLE SHEETS DATABASE (SAVE & REFRESH) ---
         async function saveDataToSheet() {
             const payload = { action: "save", data: dbBahan };
             try {
@@ -600,7 +612,7 @@
 
                 let statusBadge = `<span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px] font-bold rounded-full">Ideal (< 57%)</span>`;
                 
-                // Evaluasi Berdasarkan Ambang Batas Ketat Sesuai Permintaan
+                // Evaluasi Berdasarkan Ambang Batas Ketat Sesuai Instruksi
                 if (fcIn >= 61 || fcTa >= 61) {
                     statusBadge = `<span class="px-3 py-1 bg-rose-600/20 text-rose-300 border border-rose-500/40 text-[11px] font-bold rounded-full animate-pulse">Kritis (&ge; 61%)</span>`;
                     highUrgencyCount++;
